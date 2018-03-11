@@ -1,0 +1,22 @@
+extends ../layout.jade
+
+block content
+  h1 New Book
+
+  include ../includes/error.jade
+
+  form(method='POST' action='/books/new_book')
+    p
+      label(for='title') Title
+      input(id='title' name='title' type='text')
+    p
+      label(for='author') Author
+      input(id='author' name='author' type='text')
+    p
+      label(for='genre') Genre
+      input(id='genre' name='genre' type='text')
+    p
+      label(for='genre') First Published
+      input(id='first_published' name='first_published' type='text')
+    p
+      input(type='submit')

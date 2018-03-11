@@ -1,0 +1,46 @@
+extends ../layout.jade
+
+block content
+  h1 Book: #{book.title}
+
+  include ../includes/error.jade
+
+  form(action='/books/details/#{book.id}', method="post")
+    p
+      label(for='title') Book Title:
+      input(id='title' name='title' type='text' value=book.title)
+    p
+      label(for='author') Author:
+      input(id='author' name='author' type='text' value=book.author)
+    p
+      label(for='genre') Genre:
+      input(id='genre' name='genre' type='text' value=book.genre)
+    p
+      label(for='genre') First Published:
+      input(id='first_published' name='first_published' type='text' value=book.first_published)
+    p
+      input(type='submit', value='Update')
+
+  h2 Loan History
+  table
+    thead
+      tr
+        th Book
+        th Patron
+        th Loaned on
+        th Return by
+        th Returned on
+        th Action
+    tbody
+      if loans
+        each loan in loans
+          tr
+            td
+              a(href='/books/details/#{loan.Book.id}')= loan.Book.title
+            td
+              a(href='/patrons/details/#{loan.Patron.id}')= loan.Patron.first_name + ' ' + loan.Patron.last_name
+            td= loan.loaned_on
+            td= loan.return_by
+            td= loan.returned_on
+            td
+              a.button(href='/loans/return/#{loan.Book.id}') Return Book

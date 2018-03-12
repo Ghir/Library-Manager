@@ -6,8 +6,8 @@ const Patron = require("../models").Patron;
 
 // GET all patrons
 router.get('/', (req, res, next) =>  {
-  Patron.findAll().then(patrons => {
-    res.render("patrons/patrons", {patrons: patrons});
+  Patron.findAll({order: [["first_name", "ASC"]]}).then(patrons => {
+    res.render("patrons/patrons", { patrons });
   }).catch(error => {
       res.send(500, error);
    });
@@ -16,7 +16,7 @@ router.get('/', (req, res, next) =>  {
 // GET patron details
 router.get("/details/:id", (req, res, next) => {
   const patron = Patron.find({ where: { id: req.params.id }})
-  const loans = Loan.findAll({ where: { patron_id: req.params.id }, include: [{model: Book}]})
+  const loans = Loan.findAll({ where: { patron_id: req.params.id }, include: [{ model: Book }] })
   Promise.all([patron, loans]).then(data => {
     res.render("patrons/details", {patron: data[0], loans: data[1]});
   }).catch(function(error){
@@ -26,18 +26,19 @@ router.get("/details/:id", (req, res, next) => {
 
 // POST edit patron details
 router.post("/details/:id", function(req, res, next){
-  Patron.update(req.body, { where: [{ id: req.params.id }] }).then((patron) => {
-      res.redirect('/patrons');
+  Patron.update(req.body, { where: [{ id: req.params.id }] }).then(patron => {
+    res.redirect('/patrons');
   }).catch(error => {
       if (error.name === 'SequelizeValidationError') {
         const patron = Patron.find({ where: { id: req.params.id }})
-        const loans = Loan.findAll({ where: { patron_id: req.params.id }, include: [{model: Book}]})
+        const loans = Loan.findAll({ where: { patron_id: req.params.id }, include: [{ model: Book }] })
         Promise.all([patron, loans]).then(data => {
-          res.render("patrons/details", {patron: data[0], loans: data[1], errors: error.errors});
+          res.render("patrons/details", { patron: data[0], loans: data[1], errors: error.errors });
           })
         } else {
           res.status(500).send(error);
-    }})
+        }
+    })
 })
 
 // GET new patron

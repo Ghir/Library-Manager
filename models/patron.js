@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Patron = sequelize.define('Patron', {
+  const Patron = sequelize.define('Patron', {
     first_name: {
       type: DataTypes.STRING,
       validate: {
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       }
   },
  });
-  Patron.associate = function(models) {
+  Patron.associate = models => {
     Patron.hasMany(models.Loan, { foreignKey: 'patron_id' });
   };
   return Patron;

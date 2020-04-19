@@ -1,6 +1,6 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  var Book = sequelize.define("Book",
+  const Book = sequelize.define("Book",
     {
       title: {
         type: DataTypes.STRING,
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       first_published: DataTypes.INTEGER
     },
   );
-  Book.associate = function(models) {
+  Book.associate = models => {
     Book.hasOne(models.Loan, { foreignKey: "book_id" });
   };
   return Book;

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  var Loan = sequelize.define('Loan', {
+  const Loan = sequelize.define('Loan', {
     book_id: {
       type: DataTypes.INTEGER,
       validate: {
@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
     }
   })
-  Loan.associate = function(models) {
+  Loan.associate = models => {
     Loan.belongsTo(models.Book, { foreignKey: "book_id" });
     Loan.belongsTo(models.Patron, { foreignKey: "patron_id" });
   };

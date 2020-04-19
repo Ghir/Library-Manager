@@ -1,4 +1,4 @@
-### Library Manager
+## Library Manager
 
 Full-Stack library management app: insert new books, create or end a loan, check all the current statuses.
 
@@ -15,13 +15,13 @@ Full-Stack library management app: insert new books, create or end a loan, check
 
 ### Running
 
-- `npm install`
-- `npm start`
+* `npm install`
+* `npm start`
 
 ### Technologies
 
-- Node
-- Express
-- SQLite
-- Sequelize
-- Pug
+* Node
+* Express
+* SQLite
+* Sequelize
+* Pug

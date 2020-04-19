@@ -1,9 +1,9 @@
-extends ../layout.jade
+extends ../layout.pug
 
 block content
   h1 Book: #{book.title}
 
-  include ../includes/error.jade
+  include ../includes/error.pug
 
   form(action='/books/details/#{book.id}', method="post")
     p

@@ -1,8 +1,8 @@
-extends ../layout.jade
+extends ../layout.pug
 
 block content
   h1 Patron: #{patron.first_name} #{patron.last_name}
-  include ../includes/error.jade
+  include ../includes/error.pug
 
   form(method='POST', action='/patrons/details/#{patron.id}')
     p
